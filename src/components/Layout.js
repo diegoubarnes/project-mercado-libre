@@ -1,16 +1,14 @@
-// import React from 'react';
+import React from 'react';
+import Home from '../pages/home';
 
-// import Navbar from './Navbar';
 
-// function Layout(props) {
-//   // const children = props.children;
+function Layout(props) {
+  return (
+    <React.Fragment>
+      <Home/>
+      {props.children}
+    </React.Fragment>
+  );
+}
 
-//   return (
-//     <React.Fragment>
-//       <Navbar />
-//       {props.children}
-//     </React.Fragment>
-//   );
-// }
-
-// export default Layout;
+export default Layout;
