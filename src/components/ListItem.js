@@ -5,7 +5,7 @@ import { withRouter } from 'react-router';
 
 class ListItem extends React.Component {
     goToDetails(product) {
-      this.props.history.push("/items/" + product);
+      window.location.href="/items/" + product;
     }
     render() {
       return (

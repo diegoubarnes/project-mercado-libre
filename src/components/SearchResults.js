@@ -11,12 +11,14 @@ class SearchResults extends React.Component {
         <div className="Search__container">
         <div className="List">
           <ul className="list-unstyled">
-            {this.props?.products?.map(item => {
+            {this.props?.products?.map((item, index) => {
+              if(index <= 3) {
               return (
                 <li key={item.id}>
                   <ListItem item={item} />
                 </li>
               );
+              }
             })}
           </ul>
         </div>

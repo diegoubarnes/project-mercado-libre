@@ -5,9 +5,8 @@ import Search from './../components/SearchContainer';
 import PageLoading from './../components/PageLoading';
 import api from '../Api';
 import SearchResults from '../components/SearchResults';
+import PageError from '../components/PageError';
 import { withRouter } from 'react-router';
-import ProductDetail from '../components/ProductDetail';
-import ListItem from '../components/ListItem';
 
 class Home extends React.Component {
     state = {
@@ -38,6 +37,7 @@ class Home extends React.Component {
       };
 
       getResultFromApi = async () => {
+        try {
         const data = await api.Search.searchItems(this.state.form.inputSearch);
           console.log(data)
           let products = [];
@@ -45,11 +45,19 @@ class Home extends React.Component {
             products = data.items
           }
           this.setState ({loading: false, data: products});
+        } catch (error) {
+          this.setState({ loading: false, error: error });
+        }
       }
       render() {
         if (this.state.loading) {
           return <PageLoading />;
         }
+
+        if (this.state.error) {
+          return <PageError error={this.state.error} />;
+        }
+
         return (
             <div >
                 <div>

@@ -5,14 +5,16 @@ import Results from './SearchResults';
 import Details from './ProductDetail';
 import Layout from './Layout';
 import NotFound from '../pages/NotFound';
+import Welcome from './Welcome';
 function App() {
   return (
     <BrowserRouter>
     <Layout>
       <Switch>
-        <Route path="/items/:id" component={Details} />
-        <Route path="/items/search" component={Results} />
-        <Route path="/7" component={NotFound} />
+        <Route exact path="/" component={Welcome} />
+        <Route exact path="/items/:id" component={Details} />
+        <Route exact path="/items/search" component={Results} />
+        <Route component={NotFound} />
       </Switch>
     </Layout>
   </BrowserRouter>

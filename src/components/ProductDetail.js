@@ -3,28 +3,43 @@ import api from '../Api';
 
 
 import './styles/ProductDetails.sass';
+import PageLoading from './PageLoading';
+import PageError from './PageError';
 
 class ProductDetail extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      detailProduct: {}
+      detailProduct: {},
+      loading: true
     }
     const id = this.props.match.params.id;
     this.getResultFromApiDetails(id);
   }
 
   getResultFromApiDetails = async (id) => {
-    const dataDetails = await api.Search.searchItemDescription(id);
-    console.log (dataDetails);
-    let detailProduct = [];
-    if (dataDetails && dataDetails.item) {
-      detailProduct = dataDetails.item;
+    try {
+      const dataDetails = await api.Search.searchItemDescription(id);
+      console.log (dataDetails);
+      let detailProduct = [];
+      if (dataDetails && dataDetails.item) {
+        detailProduct = dataDetails.item;
+      }
+      this.setState ({loading: false, dataDetails: detailProduct});
+      
+    } catch (error) {
+      this.setState({ loading: false, error: error });
     }
-    this.setState ({loading: false, dataDetails: detailProduct});
   };
   render () {
+    if (this.state.loading) {
+      return <PageLoading />;
+    }
+
+    if (this.state.error) {
+      return <PageError error={this.state.error} />;
+    }
     return (
       <div className="container">
         <div className="Details__container row">
