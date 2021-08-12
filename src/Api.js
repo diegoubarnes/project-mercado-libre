@@ -6,16 +6,17 @@ const randomNumber = (min = 0, max = 1) =>
 const simulateNetworkLatency = (min = 30, max = 1500) =>
   delay (randomNumber (min, max));
 
-async function callApi (endpoint, options = {}) {
+async function callApi (endpoint) {
   await simulateNetworkLatency ();
 
-  options.headers = {
+  const optionsHeaders = {
+    'Access-Control-Allow-Origin': 'http://localhost:3001',
     'Content-Type': 'application/json',
     Accept: 'application/json',
   };
 
   const url = BASE_URL + endpoint;
-  const response = await fetch (url, options);
+  const response = await fetch (url, {mode: 'cors', headers: optionsHeaders});
   const data = await response.json ();
 
   return data;
@@ -23,7 +24,10 @@ async function callApi (endpoint, options = {}) {
 
 const api = {
   Search: {
-    searchItems(SearchId) {
+    searchItems(Query) {
+      return callApi(`/search?q=${Query}`);
+    },
+    searchItemDescription(SearchId) {
       return callApi(`/items/${SearchId}`);
     },
   },

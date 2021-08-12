@@ -1,14 +1,11 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
 
 import logo from '../assets/images/Logo_ML.png';
 import btnSearch from '../assets/images/ic_Search.png';
 import './styles/SearchContainer.sass';
 
 class Search extends React.Component {
-  handleClick () {
-    console.log ('object');
-  }
+
   render () {
     return (
       <div className="Search">
@@ -30,14 +27,12 @@ class Search extends React.Component {
                   placeholder="Nunca dejes de buscar"
                   value={this.props.formValues.inputSearch}
                 />
-                <Link
-                  to="/items/search"
-                  onClick={this.handleClick}
+                <button
                   className="btn btn-outline-secondary"
                   id="button-search"
                 >
                   <img src={btnSearch} alt="Boton para buscar" />
-                </Link>
+                </button>
               </div>
             </form>
           </div>
