@@ -10,7 +10,7 @@ function App() {
     <BrowserRouter>
     <Layout>
       <Switch>
-        <Route path="/items/id" component={Details} />
+        <Route path="/items/:id" component={Details} />
         <Route path="/items/search" component={Results} />
         <Route path="/7" component={NotFound} />
       </Switch>

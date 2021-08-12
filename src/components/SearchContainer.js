@@ -3,6 +3,7 @@ import React from 'react';
 import logo from '../assets/images/Logo_ML.png';
 import btnSearch from '../assets/images/ic_Search.png';
 import './styles/SearchContainer.sass';
+import { Link } from 'react-router-dom';
 
 class Search extends React.Component {
 
